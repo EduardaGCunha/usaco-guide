@@ -26,7 +26,6 @@ int main(){
         }
         for(int i = 0; i < a.second/2; i++){
             r += char(a.first);
-            abc[a.second]--;
         }
     }
 
@@ -35,9 +34,8 @@ int main(){
         for(int i = 0; i < middle_cnt; i++){
             r+=char(middle);
         }
-        v= v - 1;
     }
-    for(int i = v; i >= 0; i--){
+    for(int i = v-1; i >= 0; i--){
             r+=char(r[i]); 
     }
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main(){
-    int n; 
+    int n;
     scanf("%d", &n);
-    printf("%d minutos\n", 2*n);
+    printf("%d\n", n - 2);
 }

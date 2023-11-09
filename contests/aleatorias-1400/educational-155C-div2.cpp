@@ -12,12 +12,13 @@ int main(){
     while(t--){
         string s; cin >> s;
         int cnt = 0;
-        int res = 1;
         for(int i = 0; i < s.size() - 1; i++){
-            if(s[i] == s[i+1]) cnt++;
+            if(s[i] == s[i+1]){
+                cnt++;
+                upd(cnt+1, cnt - i);
+            }
         }
         
-        upd(res, cnt);
 
         int fact = 1;
         for(int i = 2; i <= cnt + 1; i++){

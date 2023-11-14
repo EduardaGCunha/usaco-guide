@@ -16,11 +16,13 @@ int main(){
     printf("Aluno em exame.\n");
     double e;
     scanf("%lf", &e); 
+    printf("Nota do exame: %.1lf\n", e);
     media = (media + e)/2;
-    printf("Media final: %.1lf\n", media);
     if(media > 4.9){
         printf("Aluno aprovado.\n");
+        printf("Media final: %.1lf\n", media);
         return 0;
     }
     printf("Aluno reprovado.\n");
+    
 }

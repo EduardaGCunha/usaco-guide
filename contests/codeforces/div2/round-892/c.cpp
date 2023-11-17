@@ -5,13 +5,12 @@ int main(){
     int t; cin >> t;
     while(t--){
         int n; cin >> n;
-
-        int ans = 0;
-        vector<vector<int>> dp;
-
-        
-        for(int i = 1; i <= n; i++){
-
+        int a = (n-1) * n;
+        int sum = 0;
+        for(int i = 1; i < n - 1; i++){
+            sum += i*i;
         }
+        sum += a;
+        cout << sum << endl;
     }
 }

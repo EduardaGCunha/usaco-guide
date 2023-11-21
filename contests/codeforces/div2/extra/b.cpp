@@ -1,27 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long
+int x, y; 
+
+void solve(int n){
+    if(n >= 10) solve(n/10);
+    x*= 10;
+    y*= 10;
+    x += (n%10)/2;
+    y += (n%10+1)/2;
+    if(n&1) swap(x, y);
+}
 
 int main(){
     int t; cin >> t;
     while(t--){
-        ll int n; cin >> n;
-        cin>>t;
-            while (t--){
-                cin>>n;
-                int a = 0,b = 0,bas = 1,cur = 0;
-                while (n){
-                    int x = n%10;
-                    n/=10;
-                    if (x%2 == 0) a+=bas*x/2,b+=bas*x/2;
-                    else{
-                        a+=bas*(x/2+cur),b+=bas*(x/2+1-cur);
-                        cur^=1;
-                    }
-                    bas*=10;
-                }
-                cout<<a<<" "<<b<<"\n";
-            }
-}
+        int n; cin >> n;
+        x=y=0;
+        solve(n);
+        cout << x << " " << y << endl;
+    }
 }

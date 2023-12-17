@@ -9,6 +9,8 @@ int main(){
         if(s[i] == 'L') cnt_l++;
         else cnt_o++;
     }
+
+    //what i'm doing here is finding the right position
     int curL = 0, curO = 0;
     for(int i = 0; i < n-1; i++){
         if(s[i] == 'L') cnt_l--, curL++;

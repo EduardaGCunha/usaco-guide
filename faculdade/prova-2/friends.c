@@ -20,6 +20,7 @@ int main()
                 somaDivisoresY += j;
             }
         }
+        printf("%d %d", somaDivisoresX, somaDivisoresY);
         if(somaDivisoresX == y && somaDivisoresY == x){
             amigos = 1;
         }else{

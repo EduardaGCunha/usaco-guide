@@ -21,12 +21,13 @@ int main(){
         }
     }
 
-    for(int i = 0; i < 100; i++){
-        mx = max(mx, l[i] - s[i]);
+    for(int i = 1; i <= 100; i++){
+        if(s[i] > l[i]){
+            mx = max(mx, s[i] - l[i]);
+        }
     }
 
     freopen("speeding.out", "w", stdout);
     cout << mx << endl;
 
-    
 }

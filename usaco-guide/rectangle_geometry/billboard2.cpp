@@ -25,10 +25,6 @@ int main(){
 
     //cases not accounted: if cow feed is entirely greater than lawnmower
     //
-    if(area == 0){
-        cout << a.area() << endl;
-        return 0;
-    }
     if(w >= (a.x2 - a.x1) || l >= (a.y2 - a.y1)){
         cout << a.area() - area << endl;
         return 0;

@@ -6,16 +6,11 @@ int main(){
     freopen("whereami.out", "w", stdout);
     int n, k = 0; cin >> n;
     string s; cin >> s;
-    set<char> val;
-    for(int i = 0; i < n - 1; i++){
-        if(val.count(s[i]) == 0){
-            val.insert(s[i]);
-        }else{
-            k = i;
-            break;
+    for(int i = 0; i < n; i++){
+        set<string> s;
+        for(int j = i + 1; j < n; j++){
+            
         }
     }
-
-    cout << k << endl;
 
 }

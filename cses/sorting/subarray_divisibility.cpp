@@ -1,17 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 #define ll long long
 
 int main(){
-    int n; cin >> n;
-    vector<ll> val(n, -1);
-    val[0] = 0;
-    ll ans = 0, sum = 0;
+    int n; cin >> n;   
+    ll sum = 0, ans = 0;
+    vector<ll> m(n);
+    m[0] = 1;
     for(int i = 0; i < n; i++){
-        int a; cin >> a;
-        sum = ((sum+a)%n + n)%n;
-        ans = ++val[sum];
+        ll a; cin >> a;
+        sum += a;
+        m[(sum%n + n)%n]++;
     }
+
+    for(ll a : m){
+        ans += ((a)*(a-1))/2;
+    }
+
     cout << ans << endl;
 }

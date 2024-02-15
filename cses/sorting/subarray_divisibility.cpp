@@ -1,21 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define ll long long
 
-int main(){
-    int n; cin >> n;   
-    ll sum = 0, ans = 0;
-    vector<ll> m(n);
-    m[0] = 1;
-    for(int i = 0; i < n; i++){
-        ll a; cin >> a;
-        sum += a;
-        m[(sum%n + n)%n]++;
-    }
+#define int long long
 
-    for(ll a : m){
-        ans += ((a)*(a-1))/2;
-    }
-
-    cout << ans << endl;
+signed main(){
+	int n; cin >> n;
+	vector<int> prefix(n);
+    prefix[0] = 1;
+	for(int i = 0, sum = 0; i < n; i++){
+		int a; cin >> a;
+	    sum += a;
+		prefix[(sum%n+n)%n]++;
+	}
+	int ans = 0;
+	for(auto a : prefix){
+		ans += ((a)*(a-1)/2);
+	}
+	cout << ans << "\n";
 }

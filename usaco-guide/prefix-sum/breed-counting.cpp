@@ -8,22 +8,10 @@ int main(){
     vector<int> h(n+1, 0), j(n+1, 0), g(n+1, 0);
     for(int i = 1; i <= n; i++){
         int a; cin >> a;
-        if(a == 1){
-            h[i] = h[i-1] + 1;
-            g[i] = g[i-1];
-            j[i] = j[i-1];
-        }
-        else if(a == 2){
-            j[i] = j[i-1] + 1;
-            g[i] = g[i-1];
-            h[i] = h[i-1];
-        }
-        else{
-            g[i] = g[i-1]+1;
-            j[i] = j[i-1];
-            h[i] = h[i-1];
-        }
-
+        h[i] = h[i-1], g[i] = g[i-1], j[i] = j[i-1];
+        if(a == 1) h[i]++;
+        else if(a == 2) j[i]++;
+        else h[i]++;
     }
 
     while(q--){

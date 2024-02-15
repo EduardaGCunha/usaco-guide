@@ -9,7 +9,6 @@ vector<int> graph[MAXN];
 int visited[MAXN];
 
 void dfs(int v){
-    cout << v << " ";
     visited[v] = 1;
     for(int i = 0; i < graph[v].size(); i++){
         int viz = graph[v][i];

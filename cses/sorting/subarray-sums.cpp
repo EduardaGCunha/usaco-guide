@@ -5,18 +5,16 @@ using namespace std;
 
 signed main(){
     int n, m; cin >> n >> m;
-    int arr[n+1];
+    int arr[n+2];
     for(int i = 0; i < n; i++) cin >> arr[i];
     int ans = 0;
-    for(int i = 0, j = 0, sum = 0; i < n; i++){
+    for(int i = 0, sum = 0, j = 0; i < n; i++){
         sum += arr[i];
         while(sum > m){
             sum -= arr[j];
             j++;
         }
-        if(sum <= m){
-            ans = max(ans, i - j + 1);
-        }
+        if(sum == m) ans++;
     }
 
     cout << ans << endl;

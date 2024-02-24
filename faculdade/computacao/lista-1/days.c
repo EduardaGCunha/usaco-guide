@@ -23,7 +23,6 @@ int* solve(int arr[], int n){
     for(int i = 0; i < n; i++){
         arr[i] = arr1[i];
     }
-    return arr;
 }
 
 int main(){

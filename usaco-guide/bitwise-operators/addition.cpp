@@ -13,8 +13,7 @@ int main(){
             cin >> arr[i];
             if(arr[i] < arr[i-1]){
                 if((arr[i]&(arr[i]-1)) == 0)ans = max(__builtin_ctz(i)+1, ans);
-                else p.insert(i);
-                
+                else p.insert(i);       
             }
         }
 

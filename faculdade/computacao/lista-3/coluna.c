@@ -5,7 +5,7 @@ double m[12][12];
 void sum(int j){
     double sum = 0;
     for(int i = 0; i < 12; i++){
-        sum += m[j][i];
+        sum += m[i][j];
     }
     printf("%.1lf\n", sum);
 }
@@ -13,7 +13,7 @@ void sum(int j){
 void media(int j){
     double sum = 0;
     for(int i = 0; i < 12; i++){
-        sum += m[j][i];
+        sum += m[i][j];
     }
     printf("%.1lf\n", sum/12);
 }

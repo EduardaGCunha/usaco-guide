@@ -10,7 +10,6 @@ int main(){
     int radius[n+1];
     for(int i = 0; i < n; i++){
         int a, b, c; cin >> a >> b >> c;
-        a--, b--;
         coord[i].first = a;
         coord[i].second = b;
         radius[i] = c;
@@ -22,11 +21,8 @@ int main(){
         for(int j = i+1; j < n; j++){
             int x2 = coord[j].first, y2 = coord[j].second;
             double res = sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
-            if(res <= radius[i]){
-                graph[i].push_back(j);
-            }else if(res <= radius[j]){
-                graph[j].push_back(i);
-            }
+            if(res <= radius[i]) graph[i].push_back(j);
+            if(res <= radius[j]) graph[j].push_back(i);
         }
     }
 
@@ -36,12 +32,15 @@ int main(){
         queue<int> q;
         q.push(i);
         int cnt = 0;
+        visited[i] = true;
         while(!q.empty()){
             int v = q.front(); q.pop();
-            visited[v] = true;
             cnt++;
             for(auto u : graph[v]){
-                if(!visited[u]) q.push(u);
+                if(!visited[u]){
+                    q.push(u);
+                    visited[u] = true;
+                }
             }
         }
         res = max(res, cnt);

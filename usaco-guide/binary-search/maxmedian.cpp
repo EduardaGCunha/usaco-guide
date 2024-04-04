@@ -13,8 +13,8 @@ signed main(){
     int mx = -1, mn = INT_MAX;
     for(int i = 0; i < n; i++) cin >> arr[i];
     sort(arr, arr+n);
-    int median = ((n+1)/2)-1;
-    int l = median, r = n; 
+    
+
     while(l < r){
         int mid = (l+r)/2;
         

@@ -8,7 +8,6 @@ pair<int, int> p[MAXN];
 
 bool check(int d){
     int cnt = 1, cur = p[0].first;
-    //cout << "d: " << d << endl;
     for(int i = 0; i < m; i++){
         if(cur + d <= p[i].first){
             cur = p[i].first;
@@ -17,7 +16,6 @@ bool check(int d){
         while(cur + d >= p[i].first && cur + d <= p[i].second){
             cnt++;
             cur += d;
-            //cout << cur + d << " ";
         }
     }
     return cnt >= n;

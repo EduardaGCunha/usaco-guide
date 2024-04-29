@@ -15,6 +15,8 @@ int dynamic(int i){
 }
 
 signed main(){
+    freopen("ladder.in", "r", stdin);
+    freopen("ladder.out", "w", stdout);
     cin >> n; 
     for(int i = 1; i <= n; i++) cin >> arr[i];
     arr[0] = 0;

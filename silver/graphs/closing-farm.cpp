@@ -28,6 +28,7 @@ void comp(){
 int main(){
     freopen("closing.in", "r", stdin);
     freopen("closing.out", "w", stdout);
+
     cin >> n >> m;
     for(int i = 0; i < m; i++){
         int a, b; cin >> a >> b;

@@ -23,5 +23,5 @@ int main(){
         p.insert({x, y});
     }
 
-    cout << ans << endl;
+    //cout << ans << endl;
 }

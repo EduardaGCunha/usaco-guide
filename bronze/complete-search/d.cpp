@@ -1,25 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define int long long
+int n, k;
+const int MAXN = 1e3;
+int arr[MAXN];
 
-signed main(){
+int main(){
     freopen("diamond.in", "r", stdin);
     freopen("diamond.out", "w", stdout);
-    int n, k; cin >> n >> k;
+    cin >> n >> k;
     int arr[n];
-    for(int i = 0; i < n; i++) cin >> arr[i];
+    for(int i = 0; i < n; i++){
+        cin >> arr[i]; 
+    }
 
     sort(arr, arr+n);
-    int st = 0;
-    int m = 1;
-    //1 1 3 4 6
-    for(int i = 0; i < n-1; i++){
-        for(int j = i+1; j < n; j++){
-            if(arr[j] - arr[i] > k){
-                m = max(m, j - i);
+
+    int res = 0;
+    for(int i = 0; i < n; i++){
+        int  m = 0;
+        int s = arr[i];
+        for(int j = 0; j < n; j++){
+            if(i == j) continue;
+            if(abs(arr[j]-s) <= k){
+                m++;
+                s = min(arr[j], s);
             }
         }
+        res = max(res, m);
     }
-    cout << m << endl;
+
+    cout << res+1 << endl;
 }

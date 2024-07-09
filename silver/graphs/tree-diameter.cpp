@@ -3,23 +3,16 @@ using namespace std;
 
 const int MAXN = 2*(1e5)+7;
 vector<int> graph[MAXN], ordemSaida;
-int dis[MAXN], c = 0;
+int dis, cur;
 
-void dfs(int v, int p){
-    for(auto a : graph[v]){
-        if(a != p){
-            dfs(a, v);
-        }
+void dfs(int v, int p, int d){
+    for(auto u : graph[v]){
+        if(u == p) continue;
+        dfs(u, v, d+1);
     }
-    ordemSaida.push_back(v);
-}
-
-void dfs2(int v, int p){
-    for(auto a : graph[v]){
-        if(a != p){
-            dfs(a, v);
-            c++;
-        }
+    if(dis < d){
+        dis = d;
+        cur = v;
     }
 }
 
@@ -32,7 +25,7 @@ int main(){
         graph[b].push_back(a);
     }
 
-    dfs(0, -1);
-    dfs2(ordemSaida[n-2], -1);
-    cout << c << endl;
+    dfs(0, -1, 0);
+    dfs(cur, -1, 0);
+    cout << dis << endl;
 }

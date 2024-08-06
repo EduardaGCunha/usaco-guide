@@ -1,24 +1,45 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define ll long long
+#define int long long
 
-const ll INF = 1e18;
+const int INF = 1e18;
 const int MAXN = 2*(1e5)+7;
 vector<pair<int, int>> graph[MAXN];
-int dist[MAXN][10];
+vector<vector<int>> dist;
 
 
-int main(){
+signed main(){
     int n, m, k; cin >> n >> m >> k;
 
     for(int i = 0; i < m; i++){
-        int a, b; ll c;
+        int a, b, c; cin >> a >> b >> c;
         a--, b--;
         graph[a].push_back({b, c});
     }
 
-    priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>> pq;
-    dist[0] = 0;
+    dist.resize(n, vector<int>(k, INF));
+
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    dist[0][0] = 0;
+    pq.push({0, 0});
+    while(!pq.empty()){
+        auto [d, v] = pq.top(); pq.pop();
+
+        if(dist[v][k-1] < d) continue;
+
+        for(auto [u, dis]: graph[v]){
+            if(dist[u][k-1] > dis+d){
+                dist[u][k-1] = dis+d;
+                pq.push({dis+d, u});
+                sort(dist[u].begin(), dist[u].end());
+            } 
+        }
+    }
+
+    for(int i = 0; i < k; i++){
+        cout << dist[n-1][i] << " ";
+    }
+    cout << endl;
     
 }

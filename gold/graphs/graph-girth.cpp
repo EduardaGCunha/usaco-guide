@@ -2,47 +2,47 @@
 using namespace std;
 
 const int MAXN = 1e5;
-int graph[MAXN];
-int visited[MAXN];
-int n;
-queue<int> q;
-int steps;
+vector<int> graph[MAXN];
+int n, m;
 
-void dfs(int v){
-    q.push(v);
-    if(visited[v]){
-        return;
+int bfs(int x){
+    vector<int> dist(n, -1);
+    queue<pair<int, int>> q;
+    q.push({x, -1}); //node, parent;
+    dist[x] = 0;
+
+    int ans = INT_MAX;
+    while(!q.empty()){
+        auto [v, p] = q.front(); q.pop();
+
+        for(auto u : graph[v]){
+            if(u == p) continue;
+            if(dist[u] == -1){
+                dist[u] = dist[v] + 1;
+                q.push({u, v});
+            }else{
+                ans = min(ans, dist[u]+dist[v]+1);
+            }
+        }
     }
-    visited[v] = 1;
-    steps++;
-    dfs(graph[v]);
+
+    return ans;
 }
 
 int main(){
-    freopen("shuffle.in", "r", stdin);
-    freopen("shuffle.out", "w", stdout);
-    cin >> n;
+    cin >> n >> m;
+    for(int i = 0; i < m; i++){
+        int a, b; cin >> a >> b;
+        a--, b--;
+        graph[a].push_back(b);
+        graph[b].push_back(a);
+    }
+    
+    int girth = INT_MAX;
     for(int i = 0; i < n; i++){
-        int a; cin >> a;
-        a--;
-        graph[i] = a;
+        girth = min(bfs(i), girth);
     }
 
-    int ans = INT_MAX;
-    for(int i = 0; i < n; i++){
-        if(!visited[i]){
-            steps = 0;
-            dfs(i);
-            int c = 1;
-            while(!q.empty()){
-                int cur = q.front(); q.pop();
-                if(cur == q.back()) c = 0;
-                steps -= c;
-            }
-        }
-        ans = min(ans, steps);
-    }
-
-    if(ans == INT_MAX) cout << -1 << endl;
-    else cout << ans << endl;
+    if(girth == INT_MAX) cout << -1 << endl;
+    else cout << girth << endl;
 }

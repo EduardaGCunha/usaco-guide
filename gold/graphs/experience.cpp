@@ -2,7 +2,7 @@
 using namespace std;
 
 const int MAXN = 2*(1e5)+7;
-int p[MAXN], r[MAXN], sum[MAXN], x[MAXN];
+int p[MAXN], r[MAXN], sum[MAXN], x[MAXN], offset[MAXN];
 
 int get(int a){
     //if a is not it's parent, return the p[a]
@@ -24,10 +24,10 @@ void unite(int a, int b){
         r[a]++;
     }if(r[a] > r[b]){
         p[b] = a;
-        sum[a] += sum[b];
+        offset[b] += -x[a];
     }else {
         p[a] = b;
-        sum[b] += sum[a];
+        offset[a] += -x[b];
     }
 }
 
@@ -49,8 +49,7 @@ int main(){
         }
         else if(s == "get"){
             int a; cin >> a;
-            a = get(a);
-            cout << x[a] << endl;
+            cout << abs(x[get(a)] + offset[a]) << endl;
         }else{
             int a, b; cin >> a >> b;
             add(a, b);

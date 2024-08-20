@@ -36,11 +36,10 @@ bool dfs(int v, int p){
 }
  
 int main(){
-    int n, m; cin >> n >> m; 
+    int n, m; cin >> n >> m;
     for(int i = 0; i < m; i++){
         int a, b; cin >> a >> b;
         graph[a].push_back(b);
-        graph[b].push_back(a);
     }
  
     //push = true;

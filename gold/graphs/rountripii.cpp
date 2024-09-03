@@ -17,7 +17,6 @@ void dfs(int v){
         }
     }
     visited[v] = 2;
-    ordemSaida.push_back(v);
 }
 
 int main(){

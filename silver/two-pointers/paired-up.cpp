@@ -12,8 +12,8 @@ int main(){
         val.push_back({a, b});
     }
     sort(val.begin(), val.end());
-    int middle = t/2; 
-    if(val[middle].first == 1) cout << val[middle].second + val[middle+1].second << endl;
-    else cout << val[middle].second + val[middle].second;
+
+    int i = 0, j = n-1, ans = INT_MAX;
+
 
 }

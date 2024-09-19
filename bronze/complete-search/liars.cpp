@@ -1,26 +1,31 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 #define int long long
+
 
 signed main(){
     int n; cin >> n;
-    vector<int> g, l;
 
+    pair<char, int> p[n];
     for(int i = 0; i < n; i++){
-        char a; int b; cin >> a >> b;
-        if(a == 'G') g.push_back(b);
-        else l.push_back(b);
+        cin >> p[i].first >> p[i].second;
     }
 
-    sort(g.begin(), g.end());
-    sort(l.begin(), l.end());
-    int cnt = 0;
-    for(auto a : l){
-        auto b = upper_bound(g.begin(), g.end(), a)-g.begin();
-        cnt += b;
-    }
+    sort(p, p+n);
 
-    cout << cnt << endl;
+    int ans = n;
+    for(int i = 0; i < n; i++){
+        int liars = 0;
+        for(int j = 0; j < n; j++){
+            if((p[j].first == 'L' && p[i].second>p[j].second) || (p[j].first == 'G' && p[i].second < p[j].second)){
+                liars++;
+            }
+        }
+        ans = min(liars, ans);
+    }   
+
+    cout << ans << endl;
+
+
 }

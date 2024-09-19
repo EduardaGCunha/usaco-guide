@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const int MAXN = 1001;
+int tempo[MAXN];
+
 int main(){
     freopen("lifeguards.in", "r", stdin);
     freopen("lifeguards.out", "w", stdout);
@@ -8,19 +11,25 @@ int main(){
     pair<int,int> arr[n];
     for(int i = 0; i < n; i++){
         cin >> arr[i].first >> arr[i].second;
+        for(int j = arr[i].first; j < arr[i].second; j++){
+            tempo[j]++;
+        }
     }
 
     sort(arr, arr+n);
-    int res = 0;
+    int ans = 0;
     for(int i = 0; i < n; i++){
         int sum = 0;
-        for(int j = 0; j < n; j++){
-            if(i == j) continue;
-            sum += arr[j].second - arr[j].first;
-            if(j-1 == i || j-1 < 0 || arr[j-1].second < arr[j].first) continue;
-            sum -= arr[j-1].second - arr[j].first;
+        for(int j = 0; j < MAXN; j++){
+            if(j >= arr[i].first && j < arr[i].second){
+                tempo[j]--;
+                sum += (tempo[j] > 0);
+                tempo[j]++;
+            }else sum += (tempo[j] > 0);
         }
-        res = max(res, sum);
+        ans = max(sum, ans);
     }
-    cout << res << endl;
+
+    cout << ans << endl;
+
 }

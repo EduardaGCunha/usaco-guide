@@ -18,22 +18,29 @@ vector<string> years = {
 
 int main(){
     int n; cin >> n;
-    map<string, int> ymap;
-    for(int i = 1; i <= 12; i++){
-        ymap[years[i]] = i;
+    map<string, int> ymp;
+    for(int i = 0; i < 12; i++){
+        ymp[years[i]] = i;
     }
-    map<string, string> cowy;
-    int ans = 0;
-    cowy["Bessie"] = "Ox";
+
+    map<string, int> cymp;
+    map<string, int> diff;
+    cymp["Bessie"] = 0;
+    diff["Bessie"] = 0;
     for(int i = 0; i < n; i++){
-        string s, l, y, t, f;
-        cin >> s >> l >> l >> f >> y >> l >> l >> t;
-        if(f == "previous"){
-            //vou pegar o ano q nasceu
-            int a = 12 - (ymap[y] - ymap[cowy[t]]);
-            cowy[s] = a;
-        }else{
-            int a = 
+        string s, t, dir, a, p;
+        cin >> p >> t >> t >> dir >> a >> t >> t >> s;
+        int change = (dir == "previous" ? -1 : 1);
+        int j = cymp[s];
+        diff[p] = diff[s];
+        cymp[p] = ymp[a];
+        while(j != cymp[p]){
+            j = (j + change)%12;
+            diff[p]++;
+            cout << j << endl;
         }
+        cout << s << " " << cymp[s] << " " << diff[s] << endl;
+        cout << p << " " << cymp[p] << " " << diff[p] << endl;
     }
+    cout << diff["Elsie"] << endl;
 }

@@ -11,7 +11,7 @@ int build(int v, int l, int r){
     if(l == r) return tree[v] = arr[l];
     int m = (l+r)/2;
     int b1 = build(2*v, l, m);
-    int b2 =build(2*v+1, m+1, r);
+    int b2 = build(2*v+1, m+1, r);
     return tree[v] = min(b1, b2);
 }
 

@@ -26,21 +26,5 @@ void gen(int l, int r, int c){
 
 signed main(){
     fastio;
-    int n, x; cin >> n >> x;
-    for(int i = 0; i < n; i++) cin >> arr[i];
-
-    mp1.reserve(1<<(n/2));
-    mp2.reserve(1<<(n-n/2));
-    gen(0, n/2, 1);
-    gen(n/2, n, 0);
-
-    int ans = 0;
-    for(auto u : mp1){
-        //cout << u.first << " " << u.second << endl;
-        int k = x - u.first; 
-        auto it = mp2.find(k);
-        if(it != mp2.end()) ans += (u.second * it->second);
-    }
-
-    cout << ans << endl;
+    cout << (5<<3) << endl; 
 }

@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0)
 #define int long long
 /*
 passos
@@ -45,7 +46,7 @@ struct segtree {
 
     void update(int v, int l, int r, int idx, int x) {
         if (l == r) {
-            t[v] = x;
+            t[v] += x;
             return;
         }
         int m = (l + r)/2;
@@ -56,44 +57,29 @@ struct segtree {
     void update(int idx, int x) {
         update(0, 0, n-1, idx, x);
     }
+
+    int get(int i){
+        return query(0, i);
+    }
 };
 
+//no elemento l vou adicionar v e em r vou adicionar -v 
+//get eh so pegar a soma de prefixo ate i
 signed main(){
-    int n; cin >> n;
-    n = 2*n;
+    fastio;
+    int n, q; cin >> n >> q;
     segtree st;
-    st.init(n);
-    vector<int> arr(n);
-    for(int i = 0; i < n; i++){
-        cin >> arr[i];
-    }
-
-    vector<int> visited(n+1, -1);
-    vector<int> ans((n/2)+1);
-    for(int i = 0; i < n; i++){
-        if(visited[arr[i]] != -1){
-            ans[arr[i]] += st.query(visited[arr[i]]+1, i-1);
-            st.update(visited[arr[i]], 0);
+    st.init(n+1);
+    while(q--){
+        int op; cin >> op;
+        op--;
+        if(!op){
+            int l, r, v; cin >> l >> r >> v;
+            st.update(l, v);
+            st.update(r, -v);
         }else{
-            visited[arr[i]] = i;
-            st.update(i, 1);
+            int i; cin >> i;
+            cout << st.get(i) << endl;
         }
     }
-
-    st.init(n);  
-    vector<int> visited2(n+1, -1);
-    for (int i = n-1; i >= 0; --i) {
-        int v = arr[i];
-        if (visited2[v] == -1) {
-            visited2[v] = i;
-            st.update(i, 1);
-        } else {
-            ans[v] += st.query(i+1, visited2[v]-1);
-            st.update(visited2[v], 0);
-        }
-    }
-    for(int i = 1; i <= n/2; i++){
-        cout << ans[i] << " ";
-    }
-    cout << endl;
 }

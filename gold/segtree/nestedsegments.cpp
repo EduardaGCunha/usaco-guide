@@ -73,25 +73,24 @@ signed main(){
     for(int i = 0; i < n; i++){
         if(visited[arr[i]] != -1){
             ans[arr[i]] += st.query(visited[arr[i]]+1, i-1);
-            st.update(visited[arr[i]], 0);
+            st.update(visited[arr[i]], 1);
         }else{
             visited[arr[i]] = i;
-            st.update(i, 1);
         }
     }
 
-    st.init(n);  
-    vector<int> visited2(n+1, -1);
-    for (int i = n-1; i >= 0; --i) {
-        int v = arr[i];
-        if (visited2[v] == -1) {
-            visited2[v] = i;
-            st.update(i, 1);
-        } else {
-            ans[v] += st.query(i+1, visited2[v]-1);
-            st.update(visited2[v], 0);
-        }
-    }
+    // st.init(n);  
+    // vector<int> visited2(n+1, -1);
+    // for (int i = n-1; i >= 0; --i) {
+    //     int v = arr[i];
+    //     if (visited2[v] == -1) {
+    //         visited2[v] = i;
+    //         st.update(i, 1);
+    //     } else {
+    //         ans[v] += st.query(i+1, visited2[v]-1);
+    //         st.update(visited2[v], 0);
+    //     }
+    // }
     for(int i = 1; i <= n/2; i++){
         cout << ans[i] << " ";
     }

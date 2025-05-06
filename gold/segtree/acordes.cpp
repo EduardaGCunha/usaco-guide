@@ -2,21 +2,51 @@
 using namespace std;
 
 #define int long long
-/*
-passos
-cria uma segtree inicialmente vazia com 0
-vai colocando com 1 todo cara q eu visitar
-se eu encontrar um cara q ja foi visitado
-    faco uma query pra descobrir quem eh o valor e somo na resposta
-
-*/
 
 struct segtree {
     int n;
     vector<int> t;
+    vector<int> lazy;
     void init(int _n) {
         n = _n;
-        t.assign(4*n, 0);
+        t.assign(4*n, 1);
+        lazy.assign(4*n, 0);
+        vector<int> arr(n, 1);
+        build(arr);
+    }
+
+    void propagate(int v, int l, int r){
+        if(lazy[v] != 0){
+            t[v] += (r - l + 1)*lazy[v];
+            if(l != r){
+                lazy[2*v+1] += lazy[v];
+                lazy[2*v+2] += lazy[v];
+            }
+            lazy[v] = 0;
+        }
+    }
+
+    void updateRange(int v, int l, int r, int lx, int rx, int x){
+        propagate(v, l, r);
+        if(rx < l || r < lx) return;
+        if(lx <= l && r <= rx){
+            lazy[v] += x;
+            propagate(v, l, r);
+            return;
+        }
+
+        int m = (l+r)/2;
+        updateRange(2*v+1, l, m, lx, rx, x);
+        updateRange(2*v+2, m+1, r, lx, rx, x);
+        t[v] = t[2*v+1] + t[2*v+2];
+    }
+
+    int queryRange(int v, int l, int r, int lx, int rx){
+        propagate(v, l, r);
+        if(rx < l || r < lx) return 0;
+        if(lx <= l && r <= rx) return t[v];
+        int m = (l+r)/2;
+        return query(2*v+1, l, m, lx, rx) + query(2*v+2, m+1, r, lx, rx);
     }
 
     void build(vector<int> &a, int v, int l, int r) {
@@ -59,41 +89,6 @@ struct segtree {
 };
 
 signed main(){
-    int n; cin >> n;
-    n = 2*n;
-    segtree st;
-    st.init(n);
-    vector<int> arr(n);
-    for(int i = 0; i < n; i++){
-        cin >> arr[i];
-    }
-
-    vector<int> visited(n+1, -1);
-    vector<int> ans((n/2)+1);
-    for(int i = 0; i < n; i++){
-        if(visited[arr[i]] != -1){
-            ans[arr[i]] += st.query(visited[arr[i]]+1, i-1);
-            st.update(visited[arr[i]], 0);
-        }else{
-            visited[arr[i]] = i;
-            st.update(i, 1);
-        }
-    }
-
-    st.init(n);  
-    vector<int> visited2(n+1, -1);
-    for (int i = n-1; i >= 0; --i) {
-        int v = arr[i];
-        if (visited2[v] == -1) {
-            visited2[v] = i;
-            st.update(i, 1);
-        } else {
-            ans[v] += st.query(i+1, visited2[v]-1);
-            st.update(visited2[v], 0);
-        }
-    }
-    for(int i = 1; i <= n/2; i++){
-        cout << ans[i] << " ";
-    }
-    cout << endl;
+    //inicialmente, tudo tem 1
+    
 }

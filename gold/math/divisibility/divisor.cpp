@@ -18,33 +18,36 @@ int fastexpo(int a, int b){
     return res;
 }
 
-
 signed main(){
 	fastio;
 	int n; cin >> n;
-    vector<pair<int, int>> v;
-    int qtd = 1;
+    vector<pair<int, int>> p;
+    int cnt = 1, cnt2 = 1, impar = 1;
     for(int i = 0; i < n; i++){
-        int a, b; cin >> a >> b;
-        v.push_back({a, b});
-        qtd = (qtd*(b+1))%MOD;
+        int primo, exp; cin >> primo >> exp;
+        p.push_back({primo, exp});
+        cnt = (cnt*(exp+1))%MOD;
+        cnt2 = (cnt2*(exp+1))%(2*(MOD-1));
+        if(exp&1) impar = 0;
     }
 
-    int sum = 1;
+    int sum = 1, prod = 1;
     for(int i = 0; i < n; i++){
-        //(div^(b*(p+1))-1)/(div - 1)
-        int div = v[i].first;
-        int f = v[i].second;
-        if(div%MOD == 1){
-            int prod = ((n%MOD));
+        int exp2 = (p[i].second+1)%(MOD-1);
+
+        int num = (fastexpo(p[i].first, exp2) - 1 + MOD) % MOD;
+        int dem = (p[i].first-1 + MOD)%MOD;
+        int inv = (fastexpo(dem, MOD-2));
+        sum = (sum * ((num * inv)%MOD))%MOD;
+
+        if(!impar){
+            int exp = ((cnt2/2)*p[i].second)%(MOD-1);
+            prod = (prod * (fastexpo(p[i].first, exp))%MOD)%MOD;
         }else{
-            int exp = ((f%(MOD-1)) * (n%(MOD-1)))%(MOD-1);
-            exp = (exp+1)%(MOD-1);
-            int num = (fastexpo(div, exp)-1 + MOD)%MOD;
-            int den = (div-1 + MOD)%MOD;
-            int prod = (num*(fastexpo(den, MOD-2)))%MOD;
-            sum = (sum*prod)%MOD;
+            int exp = ((p[i].second/2)*cnt2)%(MOD-1);
+            prod = (prod*(fastexpo(p[i].first, exp))%MOD)%MOD;
         }
     }
-    cout << qtd%MOD << " " << sum%MOD << endl;
+
+    cout << (cnt%MOD) << " " << (sum%MOD) << " " << (prod%MOD) << endl;
 }
